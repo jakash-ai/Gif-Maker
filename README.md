@@ -1,73 +1,84 @@
-# React + TypeScript + Vite
+# 🎬 GIF Maker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, high-performance desktop application built using **Tauri v2**, **React**, **TypeScript**, **Vite**, and **FFmpeg** to convert video clips into optimized GIFs. It is specifically designed for creating high-quality, lightweight GIFs for presentations, professional documentation, and web use.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Features
 
-## React Compiler
+- **📂 Local Video Importing**: Drag & drop or browse local video files (MP4, MOV, WebM, AVI, MKV).
+- **📺 YouTube Slicing (Experimental)**: Load direct streams from YouTube URLs. 
+- **✂️ Interactive Timeline Selection**: Dual-range timeline slider with live frame-accurate scrub seeking.
+- **⚡ Super Fast Slicing**: Slices YouTube clips in under 2 seconds using native `yt-dlp` chunk downloads.
+- **🎛️ Advanced Optimization & Compression**:
+  - Customize frames-per-second (FPS) and resolution.
+  - Apply custom color palettes and dither modes (e.g. Sierra, Bayer).
+  - Select compression tiers (High, Medium, None) to control filesize.
+- **🚀 Auto-Save**: Automatically downloads converted GIFs directly to your system's `Downloads` folder once conversion is complete.
+- **🎨 Modern Dark Glassmorphism UI**: High-end responsive design with smooth transitions and real-time conversion progress logs.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Technology Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Frontend**: React (v19), TypeScript, Vite, Vanilla CSS.
+- **Backend & Native API Wrapper**: Tauri v2 (Rust).
+- **Core Decoders & Processors**:
+  - `@ffmpeg/ffmpeg` (WASM) for client-side local video decoding and GIF generation.
+  - `yt-dlp` & `ffmpeg` (Native) for backend YouTube stream extraction and audio-video slicing.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## ⚙️ System Requirements & Setup
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+To use the experimental **YouTube Import** feature, make sure the following dependencies are installed and available on your system's `PATH`:
+
+1. **[yt-dlp](https://github.com/yt-dlp/yt-dlp)**: High-performance command-line YouTube downloader.
+2. **[FFmpeg](https://ffmpeg.org/)**: Native command-line multimedia framework.
+
+---
+
+## 🚀 Development & Build Commands
+
+First, install the npm dependencies:
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Run in Development Mode
+To launch the Vite frontend server and boot up the Tauri desktop window:
+```bash
+npm run dev
+# or
+npx tauri dev
+```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Build Production Installers (Windows 11 / 10)
+To compile the release binary and bundle it into standalone setups:
+```bash
+npx tauri build
+```
+Once compilation is complete, the installers will be available in:
+- **EXE Installer**: `src-tauri/target/release/bundle/nsis/GIF Maker_0.1.1_x64-setup.exe`
+- **MSI Installer**: `src-tauri/target/release/bundle/msi/GIF Maker_0.1.1_x64_en-US.msi`
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 📂 Project Structure
+
+```text
+├── src/                    # React frontend application
+│   ├── components/         # UI Elements
+│   ├── hooks/              # Custom React hooks (e.g., useFFmpeg)
+│   ├── styles/             # Vanilla CSS stylesheets
+│   ├── App.tsx             # Main React entrypoint
+│   └── main.tsx            # DOM mounting
+├── src-tauri/              # Tauri native project configuration
+│   ├── src/
+│   │   ├── main.rs         # Tauri application main
+│   │   └── lib.rs          # Rust command handlers (YouTube fetch/slice metadata)
+│   ├── capabilities/       # Windows/desktop permissions configurations
+│   ├── icons/              # App & Setup bundle icons (.ico, .icns)
+│   └── tauri.conf.json     # Tauri app configuration & build pipeline
+└── package.json            # Node dependencies and scripts
 ```

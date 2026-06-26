@@ -31,6 +31,37 @@ export const useFFmpeg = () => {
     }
   };
 
+  const cancel = async () => {
+    try {
+      ffmpegRef.current.terminate();
+    } catch (e) {
+      console.error('Failed to terminate FFmpeg:', e);
+    }
+    setLoaded(false);
+    setProgress(0);
+    ffmpegRef.current = new FFmpeg();
+    
+    setLoading(true);
+    const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm';
+    const ffmpeg = ffmpegRef.current;
+
+    ffmpeg.on('progress', ({ progress }) => {
+      setProgress(progress);
+    });
+    
+    try {
+      await ffmpeg.load({
+        coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
+        wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
+      });
+      setLoaded(true);
+    } catch (error) {
+      console.error('Failed to reload FFmpeg:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     load();
   }, []);
@@ -39,6 +70,7 @@ export const useFFmpeg = () => {
     ffmpeg: ffmpegRef.current,
     loaded,
     loading,
-    progress
+    progress,
+    cancel
   };
 };
