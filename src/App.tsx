@@ -358,6 +358,7 @@ function App() {
                 handleLocalVideoPath(paths[0]);
               }
             }
+            setIsDragging(false);
           } else if (event.payload.type === 'enter') {
             setIsDragging(true);
           } else if (event.payload.type === 'leave') {
