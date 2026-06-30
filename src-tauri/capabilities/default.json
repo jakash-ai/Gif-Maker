@@ -9,9 +9,18 @@
     "core:default",
     "dialog:default",
     "fs:default",
-    "fs:allow-write",
-    "fs:allow-read",
-    "fs:allow-exists",
+    {
+      "identifier": "fs:allow-read",
+      "allow": [{ "path": "**" }]
+    },
+    {
+      "identifier": "fs:allow-write",
+      "allow": [{ "path": "**" }]
+    },
+    {
+      "identifier": "fs:allow-exists",
+      "allow": [{ "path": "**" }]
+    },
     "fs:allow-desktop-write-recursive",
     "fs:allow-download-write-recursive",
     "fs:allow-document-write-recursive",

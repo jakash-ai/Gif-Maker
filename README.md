@@ -14,8 +14,12 @@ A modern, high-performance desktop application built using **Tauri v2**, **React
   - Customize frames-per-second (FPS) and resolution.
   - Apply custom color palettes and dither modes (e.g. Sierra, Bayer).
   - Select compression tiers (High, Medium, None) to control filesize.
-- **🚀 Auto-Save**: Automatically downloads converted GIFs directly to your system's `Downloads` folder once conversion is complete.
-- **🎨 Modern Dark Glassmorphism UI**: High-end responsive design with smooth transitions and real-time conversion progress logs.
+- **📦 Batch GIF Export (New in v1.2)**: Queue up multiple video files at once and convert them in batch with a dedicated status and progress interface.
+- **💾 Custom Save Locations (New in v1.2)**: Choose where to save your exported GIFs. Auto-save directly to:
+  - Standard `Downloads` folder.
+  - Same directory as the source video file (using native Tauri and drag-and-drop file paths).
+  - Any custom chosen folder on your system (settings persist automatically across restarts).
+- **🎨 Modern Fixed Dark Glassmorphism UI**: Premium window size with fixed scaling, responsive columns, and real-time conversion progress logs.
 
 ---
 
@@ -59,8 +63,8 @@ To compile the release binary and bundle it into standalone setups:
 npx tauri build
 ```
 Once compilation is complete, the installers will be available in:
-- **EXE Installer**: `src-tauri/target/release/bundle/nsis/GIF Maker_0.1.1_x64-setup.exe`
-- **MSI Installer**: `src-tauri/target/release/bundle/msi/GIF Maker_0.1.1_x64_en-US.msi`
+- **EXE Installer**: `src-tauri/target/release/bundle/nsis/GIF Maker_1.2.0_x64-setup.exe`
+- **MSI Installer**: `src-tauri/target/release/bundle/msi/GIF Maker_1.2.0_x64_en-US.msi`
 
 ---
 

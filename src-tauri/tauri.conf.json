@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "GIF Maker",
-  "version": "0.1.1",
+  "version": "1.2.0",
   "identifier": "com.gif.maker",
   "build": {
     "frontendDist": "../dist",
@@ -15,7 +15,7 @@
         "title": "GIF Maker",
         "width": 1100,
         "height": 800,
-        "resizable": true,
+        "resizable": false,
         "fullscreen": false
       }
     ],
