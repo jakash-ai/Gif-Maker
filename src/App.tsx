@@ -1033,7 +1033,17 @@ function App() {
                     <option value={480}>480px (Standard)</option>
                     <option value={600}>600px (PPT Balanced)</option>
                     <option value={720}>720px (HD)</option>
+                    <option value={1080}>1080px (FHD Width)</option>
+                    <option value={1920}>1920px (1080p FHD)</option>
+                    <option value={2048}>2048px (2K DCI)</option>
+                    <option value={2560}>2560px (2K QHD)</option>
+                    <option value={3840}>3840px (4K UHD)</option>
                   </select>
+                  {resolution >= 1080 && (
+                    <div style={{ fontSize: '0.75rem', color: '#ffc107', marginTop: '0.4rem', lineHeight: '1.2' }}>
+                      ⚠️ High resolutions (1080p+) can be very slow to compile and may run out of memory for longer clips.
+                    </div>
+                  )}
                 </div>
 
                 <div className="controls-group">
@@ -1513,7 +1523,17 @@ function App() {
                     <option value={480}>480px (Standard)</option>
                     <option value={600}>600px (PPT Balanced)</option>
                     <option value={720}>720px (HD)</option>
+                    <option value={1080}>1080px (FHD Width)</option>
+                    <option value={1920}>1920px (1080p FHD)</option>
+                    <option value={2048}>2048px (2K DCI)</option>
+                    <option value={2560}>2560px (2K QHD)</option>
+                    <option value={3840}>3840px (4K UHD)</option>
                   </select>
+                  {resolution >= 1080 && (
+                    <div style={{ fontSize: '0.75rem', color: '#ffc107', marginTop: '0.4rem', lineHeight: '1.2' }}>
+                      ⚠️ High resolutions (1080p+) can be very slow to compile and may run out of memory for longer clips.
+                    </div>
+                  )}
                 </div>
 
                 {youtubeUrl && availableYtResolutions.length > 0 && (
